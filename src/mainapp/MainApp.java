@@ -10,8 +10,6 @@ public class MainApp {
 
 		Biblioteca.usuarios.add(new Usuario("pepe","1"));
 		
-		System.out.println(Biblioteca.usuarios.get(0).getPasswd());
-		
 		new LoginView();
 		
 	}
