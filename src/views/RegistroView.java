@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 
 import almacen.Biblioteca;
 import models.Usuario;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RegistroView {
 
@@ -47,61 +49,41 @@ public class RegistroView {
 		frame.getContentPane().add(lblRegistrar);
 
 		tfUsername = new JTextField();
-		tfUsername.setBounds(184, 82, 180, 20);
+		tfUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tfUsername.setBounds(209, 84, 180, 20);
 		frame.getContentPane().add(tfUsername);
 		tfUsername.setColumns(10);
 
 		pwdPassword = new JPasswordField();
-		pwdPassword.setBounds(184, 113, 180, 20);
+		pwdPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		pwdPassword.setBounds(209, 113, 180, 20);
 		frame.getContentPane().add(pwdPassword);
 
 		pwdConfirmPassword = new JPasswordField();
-		pwdConfirmPassword.setBounds(184, 144, 180, 20);
+		pwdConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		pwdConfirmPassword.setBounds(209, 144, 180, 20);
 		frame.getContentPane().add(pwdConfirmPassword);
 
 		lblUsername = new JLabel("Username");
-		lblUsername.setBounds(23, 82, 108, 14);
+		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblUsername.setBounds(23, 82, 108, 20);
 		frame.getContentPane().add(lblUsername);
 
 		lblPassword = new JLabel("Contrase\u00F1a");
-		lblPassword.setBounds(23, 113, 117, 14);
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPassword.setBounds(23, 113, 117, 20);
 		frame.getContentPane().add(lblPassword);
 
 		lblConfirmarPassword = new JLabel("Confirmar contrase\u00F1a");
-		lblConfirmarPassword.setBounds(21, 144, 153, 14);
+		lblConfirmarPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblConfirmarPassword.setBounds(21, 144, 188, 20);
 		frame.getContentPane().add(lblConfirmarPassword);
 
 		btnRegister = new JButton("Registrar");
 		btnRegister.addActionListener(new ActionListener() {
 			// OnClick
 			public void actionPerformed(ActionEvent e) {
-				String username = tfUsername.getText();
-				String password = new String(pwdPassword.getPassword());
-				String confirmarPassword = new String(pwdConfirmPassword.getPassword());
-				if (password.length() >= 8) {
-					if (password.equals(confirmarPassword)) {
-						if (!username.isEmpty() && !password.isEmpty() && !confirmarPassword.isEmpty()) {
-
-							Usuario u = new Usuario(username, password);
-							boolean comprobar = comprobarNombreUsu(u);
-							if (comprobar == true) {
-								Biblioteca.usuarios.add(u);
-								JOptionPane.showMessageDialog(btnRegister, "Usuario registrado correctamente");
-								new LoginView();
-								frame.dispose();
-							} else {
-								JOptionPane.showMessageDialog(btnRegister,
-										"nombre de usuario ya registrado, pruebe con otro");
-							}
-						} else {
-							JOptionPane.showMessageDialog(lblRegistrar, "Rellena todos los campos");
-						}
-					} else {
-						JOptionPane.showMessageDialog(lblRegistrar, "Las contraseñas no coinciden");
-					}
-				} else {
-					JOptionPane.showMessageDialog(lblRegistrar, "Las contraseñas tienen que tener mas de 8 caracteres");
-				}
+				registrar();
 			}
 		});
 		btnRegister.setBounds(252, 202, 89, 23);
@@ -116,6 +98,42 @@ public class RegistroView {
 		});
 		btnSalir.setBounds(85, 202, 89, 23);
 		frame.getContentPane().add(btnSalir);
+
+		pwdConfirmPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				registrar();
+			}
+		});
+	}
+
+	private void registrar() {
+		String username = tfUsername.getText();
+		String password = new String(pwdPassword.getPassword());
+		String confirmarPassword = new String(pwdConfirmPassword.getPassword());
+		if (password.length() >= 8) {
+			if (password.equals(confirmarPassword)) {
+				if (!username.isEmpty() && !password.isEmpty() && !confirmarPassword.isEmpty()) {
+
+					Usuario u = new Usuario(username, password);
+					boolean comprobar = comprobarNombreUsu(u);
+					if (comprobar == true) {
+						Biblioteca.usuarios.add(u);
+						JOptionPane.showMessageDialog(btnRegister, "Usuario registrado correctamente");
+						new LoginView();
+						frame.dispose();
+					} else {
+						JOptionPane.showMessageDialog(btnRegister, "nombre de usuario ya registrado, pruebe con otro");
+					}
+				} else {
+					JOptionPane.showMessageDialog(lblRegistrar, "Rellena todos los campos");
+				}
+			} else {
+				JOptionPane.showMessageDialog(lblRegistrar, "Las contraseñas no coinciden");
+			}
+		} else {
+			JOptionPane.showMessageDialog(lblRegistrar, "Las contraseñas tienen que tener mas de 8 caracteres");
+		}
 	}
 
 	private boolean comprobarNombreUsu(Usuario u) {
