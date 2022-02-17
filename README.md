@@ -3,6 +3,7 @@
 ## Requisitos de la app
 ### Un usuario podrá registrarse poniendo su nombre de usuario y una contraseña.
 ### La contraseña se deberá introducir dos veces para comprobar que es correcta.
+### La contraseña tiene que tener mínimo 8 caracteres.
 ### El nick de usuario no puede repetirse.
 ### Un usuario puede loguearse en la aplicación poniendo su nick de usuario y su contraseña.
 ### Un usuario registrado y que haya iniciado sesión puede:
