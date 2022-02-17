@@ -1,6 +1,6 @@
 # BibliotecaVideojuegos
 
-Requisitos de la app
+Requisitos de la app.
 Un usuario podrá registrarse poniendo su nombre de usuario y
 una contraseña.
 La contraseña se deberá introducir dos veces para comprobar que es correcta.
