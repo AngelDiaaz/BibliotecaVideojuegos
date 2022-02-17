@@ -38,6 +38,11 @@ public class RegistroView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		configureUIComponents();
+		configureListeners();
+	}
+
+	private void configureUIComponents() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,29 +85,36 @@ public class RegistroView {
 		frame.getContentPane().add(lblConfirmarPassword);
 
 		btnRegister = new JButton("Registrar");
+		btnRegister.setBounds(252, 202, 89, 23);
+		frame.getContentPane().add(btnRegister);
+
+		btnSalir = new JButton("Salir");
+		btnSalir.setBounds(85, 202, 89, 23);
+		frame.getContentPane().add(btnSalir);
+
+	}
+
+	private void configureListeners() {
 		btnRegister.addActionListener(new ActionListener() {
 			// OnClick
 			public void actionPerformed(ActionEvent e) {
 				registrar();
 			}
 		});
-		btnRegister.setBounds(252, 202, 89, 23);
-		frame.getContentPane().add(btnRegister);
 
-		btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				new LoginView();
 			}
 		});
-		btnSalir.setBounds(85, 202, 89, 23);
-		frame.getContentPane().add(btnSalir);
 
 		pwdConfirmPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				registrar();
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) { // Para que al pulsar la tecla enter, te deje acceder
+					registrar();
+				}
 			}
 		});
 	}
