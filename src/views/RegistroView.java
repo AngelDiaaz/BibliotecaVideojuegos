@@ -16,8 +16,16 @@ import models.Usuario;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Clase java swing donde se muestra la view para registrarse
+ * 
+ * @author adiaz
+ *
+ */
+
 public class RegistroView {
 
+	// Propiedades
 	private JFrame frame;
 	private JTextField tfUsername;
 	private JPasswordField pwdPassword;
@@ -42,6 +50,9 @@ public class RegistroView {
 		configureListeners();
 	}
 
+	/**
+	 * Componentes de la view
+	 */
 	private void configureUIComponents() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -94,6 +105,9 @@ public class RegistroView {
 
 	}
 
+	/**
+	 * Funciones de los elementos de la view
+	 */
 	private void configureListeners() {
 		btnRegister.addActionListener(new ActionListener() {
 			// OnClick
@@ -119,6 +133,11 @@ public class RegistroView {
 		});
 	}
 
+	/**
+	 * Registra el usuario, añadiendolo en el ArrayList de usuarios, comprueba que
+	 * la contraseña se repita correctamente y que nombre del usuario no este
+	 * registrado previamente
+	 */
 	private void registrar() {
 		String username = tfUsername.getText();
 		String password = new String(pwdPassword.getPassword());
@@ -148,6 +167,13 @@ public class RegistroView {
 		}
 	}
 
+	/**
+	 * Metodo que comprueba si el usuario esta registrado o no, comprobando el
+	 * nombre del usuario
+	 * 
+	 * @param u
+	 * @return
+	 */
 	private boolean comprobarNombreUsu(Usuario u) {
 
 		for (Usuario usu : Biblioteca.usuarios) {

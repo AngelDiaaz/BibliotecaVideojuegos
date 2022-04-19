@@ -1,6 +1,6 @@
 package views;
 
-import java.awt.Font; 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,8 +13,16 @@ import javax.swing.JTextField;
 import almacen.Biblioteca;
 import models.VideoJuegos;
 
+/**
+ * Clase java swing donde se muestra la view para registrar un nuevo videojuego
+ * 
+ * @author adiaz
+ *
+ */
+
 public class CrearVideojuegoView {
 
+	// Propiedades
 	private JFrame frame;
 	private JTextField tfPegi;
 	private JLabel lblAdd;
@@ -39,7 +47,10 @@ public class CrearVideojuegoView {
 		configureUIComponents();
 		configureListeners();
 	}
-	
+
+	/**
+	 * Componentes de la view
+	 */
 	private void configureUIComponents() {
 		frame = new JFrame();
 		frame.setVisible(true);
@@ -67,30 +78,33 @@ public class CrearVideojuegoView {
 		btnCrear = new JButton("Crear");
 		btnCrear.setBounds(352, 299, 89, 23);
 		frame.getContentPane().add(btnCrear);
-		
+
 		textDesarrolladora = new JTextField();
 		textDesarrolladora.setText("desarrolladora");
 		textDesarrolladora.setColumns(10);
 		textDesarrolladora.setBounds(93, 197, 314, 23);
 		frame.getContentPane().add(textDesarrolladora);
-		
+
 		textGenero = new JTextField();
 		textGenero.setText("genero");
 		textGenero.setColumns(10);
 		textGenero.setBounds(93, 163, 314, 23);
 		frame.getContentPane().add(textGenero);
-		
+
 		btnSalir = new JButton("Salir");
 		btnSalir.setBounds(93, 299, 89, 23);
 		frame.getContentPane().add(btnSalir);
-		
+
 		txtHoras = new JTextField();
 		txtHoras.setText("hoas (insertar n\u00FAmero)");
 		txtHoras.setColumns(10);
 		txtHoras.setBounds(93, 231, 314, 23);
 		frame.getContentPane().add(txtHoras);
 	}
-	
+
+	/**
+	 * Funciones de los elementos de la view
+	 */
 	private void configureListeners() {
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -105,12 +119,17 @@ public class CrearVideojuegoView {
 		});
 	}
 
+	/**
+	 * Metodo que inserta un videojuego en el ArrayList de videojuegos, en el que
+	 * comprueba si ya esta registrado o no. Una vez creado y guardado se cierra la
+	 * pestaña y se va a la view donde se muestra los videojuegos
+	 */
 	private void insertarJuego() {
 		boolean repetido = false;
 		if (tfPegi.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(btnCrear, "Revisa todos los campos");
 		} else {
-			for (VideoJuegos juegos: Biblioteca.juegos) {
+			for (VideoJuegos juegos : Biblioteca.juegos) {
 				if (juegos.getNombre().equalsIgnoreCase(tfNombre.getText())) {
 					repetido = true;
 				}
@@ -122,7 +141,6 @@ public class CrearVideojuegoView {
 				String desa = textDesarrolladora.getText();
 				int horas = Integer.parseInt(txtHoras.getText());
 
-				
 				VideoJuegos p = new VideoJuegos(nombre, pegi, genero, desa, horas);
 				Biblioteca.juegos.add(p);
 

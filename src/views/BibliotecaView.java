@@ -13,8 +13,17 @@ import javax.swing.JTextField;
 import almacen.Biblioteca;
 import models.VideoJuegos;
 
+/**
+ * Clase java swing donde se muestra la view con la informacion de cada
+ * videojuego
+ * 
+ * @author adiaz
+ *
+ */
+
 public class BibliotecaView {
 
+	// Propiedades
 	private JFrame frame;
 	private JTextField tfNombre;
 	private JTextField tfGenero;
@@ -49,7 +58,10 @@ public class BibliotecaView {
 		configureUIComponents();
 		configureListeners();
 	}
-	
+
+	/**
+	 * Componentes de la view
+	 */
 	public void configureUIComponents() {
 		frame = new JFrame();
 		frame.setVisible(true);
@@ -116,7 +128,7 @@ public class BibliotecaView {
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(118, 385, 145, 23);
 		frame.getContentPane().add(btnGuardar);
-		
+
 		tfHoras = new JTextField();
 		tfHoras.setEditable(false);
 		tfHoras.setColumns(10);
@@ -127,6 +139,9 @@ public class BibliotecaView {
 		printJuego();
 	}
 
+	/**
+	 * Funciones de los elementos de la view
+	 */
 	public void configureListeners() {
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,30 +149,30 @@ public class BibliotecaView {
 			}
 
 		});
-		
+
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				printDelante();
 			}
 		});
-		
+
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new CrearVideojuegoView();
 				frame.dispose();
 			}
 		});
-		
+
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int confirmar = JOptionPane.showConfirmDialog(btnBorrar,
 						"¿Estás seguro de que quieres borrar este registro?");
 				if (confirmar == 0) { // Quiere borrar
 					Biblioteca.juegos.remove(indice);
-					if(indice == 0) {
+					if (indice == 0) {
 						printDelante();
 					}
-					 if (Biblioteca.juegos.size() > 0) {
+					if (Biblioteca.juegos.size() > 0) {
 						printAtras();
 					} else {
 						JOptionPane.showMessageDialog(btnBorrar, "Te has quedado sin videojuegos");
@@ -166,20 +181,20 @@ public class BibliotecaView {
 				}
 			}
 		});
-		
+
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				interruptorEditar();
 
 			}
 		});
-		
+
 		btnCancelarActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				interruptorEditar();
 			}
 		});
-		
+
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateJuego();
@@ -188,6 +203,9 @@ public class BibliotecaView {
 		});
 	}
 
+	/**
+	 * Muestra la informacion de un videojuego con todos sus elementos en la view
+	 */
 	private void printJuego() {
 		if (Biblioteca.juegos.size() > 0) {
 			VideoJuegos a = Biblioteca.juegos.get(indice);
@@ -212,9 +230,11 @@ public class BibliotecaView {
 			btnAtras.setVisible(true);
 		}
 	}
-	
-	
 
+	/**
+	 * Muestra todos los campos vacios de los videojuegos en la view si no hay
+	 * ningun videojuego registrado
+	 */
 	private void printVacio() {
 		tfNombre.setText("");
 		tfGenero.setText("");
@@ -223,18 +243,30 @@ public class BibliotecaView {
 		tfHoras.setText("");
 	}
 
+	/**
+	 * Metodo que muestra la informacion del anterior videojuego, recorriendo hacia
+	 * atras el ArrayList de videojuegos
+	 */
 	private void printAtras() {
 		indice--;
 
 		printJuego();
 	}
 
+	/**
+	 * Metodo que muestra la informacion del siguiente videojuego, recorriendo hacia
+	 * delante el ArrayList de videojuegos
+	 */
 	private void printDelante() {
 		indice++;
 
 		printJuego();
 	}
 
+	/**
+	 * Metodo que hace visible e invisible algunos componentes de la view, cuando se
+	 * le pulsa en boton actualizar
+	 */
 	private void interruptorEditar() {
 		tfNombre.setEditable(!tfNombre.isEditable());
 		tfGenero.setEditable(!tfGenero.isEditable());
@@ -251,6 +283,9 @@ public class BibliotecaView {
 		printJuego();
 	}
 
+	/**
+	 * Metodo en el que modificas algun campo del videojuego que estamos mostrando
+	 */
 	private void updateJuego() {
 		VideoJuegos a = Biblioteca.juegos.get(indice);
 		a.setNombre(tfNombre.getText());
@@ -259,6 +294,5 @@ public class BibliotecaView {
 		a.setPegi(Integer.parseInt(tfPegi.getText()));
 		a.setHoras(Integer.parseInt(tfHoras.getText()));
 	}
-
 
 }

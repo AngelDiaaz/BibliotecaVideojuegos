@@ -17,8 +17,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Clase java swing donde se muestra la view del login del programa
+ * 
+ * @author adiaz
+ *
+ */
+
 public class LoginView {
 
+	// Propiedades
 	private JFrame frame;
 	private JTextField txtUsuario;
 	private JPasswordField pfPassword;
@@ -45,6 +53,9 @@ public class LoginView {
 		configureListeners();
 	}
 
+	/**
+	 * Componentes de la view
+	 */
 	public void configureUIComponents() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -90,6 +101,9 @@ public class LoginView {
 		frame.getContentPane().add(btnSalir);
 	}
 
+	/**
+	 * Funciones de los elementos de la view
+	 */
 	public void configureListeners() {
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,6 +135,11 @@ public class LoginView {
 
 	}
 
+	/**
+	 * Metodo que comprueba si el usuario y la contraseña es correcta. Comprueba que
+	 * este registrado en el programa, si lo esta te manda a la view de los
+	 * videojuegos
+	 */
 	private void comprobarLogin() {
 		String username = txtUsuario.getText();
 		String password = new String(pfPassword.getPassword());
